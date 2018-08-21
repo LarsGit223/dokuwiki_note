@@ -1,6 +1,7 @@
 * 2018-08-21 (fixes by Marcin Orlowski)
   * Fixed notes' CSS for DokuWiki dark themes
-
+  * Code cleanup
+  * Updated documentation
 
 * 2009-06-16 (re-packaged by Mischa The Evil)
   * Removed obsolete files from the package
