@@ -33,32 +33,32 @@
  * @license    GNU_GPL_v2
  * @author     Olivier Cortes <olive@deep-ocean.net>
  */
- 
+
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'syntax.php');
 
 
 class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
- 
+
     var $notes = array(
         'noteimportant' => array('important', 'importante'),
         'notewarning'   => array('warning','bloquante','critique'),
         'notetip'       => array('tip','tuyau','idée'),
         'noteclassic'   => array('','classic','classique')
       );
-      
+
     var $default = 'noteclassic';
 
     function getType(){ return 'container'; }
     function getPType(){ return 'block'; }
-    function getAllowedTypes() { 
+    function getAllowedTypes() {
         return array('container','substition','protected','disabled','formatting','paragraphs');
     }
 
     function getSort(){ return 195; }
 
-    // override default accepts() method to allow nesting 
+    // override default accepts() method to allow nesting
     // - ie, to get the plugin accepts its own entry syntax
     function accepts($mode) {
       if ($mode == substr(get_class($this), 7)) return true;
@@ -77,19 +77,19 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
         switch ($state) {
 
-          case DOKU_LEXER_ENTER : 
+          case DOKU_LEXER_ENTER :
             $note = strtolower(trim(substr($match,5,-1)));
- 
+
             foreach( $this->notes as $class => $names ) {
               if (in_array($note, $names))
                 return array($state, $class);
-            }            
-            
-            return array($state, $this->default);          
- 
+            }
+
+            return array($state, $this->default);
+
           case DOKU_LEXER_UNMATCHED :
             return array($state, $match);
-        
+
           default:
             return array($state);
         }
@@ -105,11 +105,11 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
             case DOKU_LEXER_ENTER :
               $renderer->doc .= '<div class="'.$data.'">';
               break;
-  
+
             case DOKU_LEXER_UNMATCHED :
               $renderer->doc .= $renderer->_xmlEntities($data);
               break;
-  
+
             case DOKU_LEXER_EXIT :
               $renderer->doc .= "\n</div>";
               break;
@@ -123,20 +123,20 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
           $this->render_odt ($renderer, $state, $data);
           return true;
         }
-        
+
         // unsupported $mode
         return false;
-    } 
+    }
 
     protected function render_odt ($renderer, $state, $data) {
         static $first = true;
         static $new;
-        
+
         if ($first == true) {
             $new = method_exists ($renderer, 'getODTPropertiesFromElement');
             $first = false;
         }
-        
+
         if (!$new) {
             // Render with older ODT plugin version.
             $this->render_odt_old ($renderer, $state, $data);
@@ -150,7 +150,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
         switch ($state) {
             case DOKU_LEXER_ENTER:
                 $type = substr($data, 4);
-                if ($type == "classic") {
+                if ($type == 'classic') {
                     $type = "note"; // the icon for classic notes is named note.png
                 }
                 $colors = array("note"=>"#eeeeff", "warning"=>"#ffdddd", "important"=>"#ffffcc", "tip"=>"#ddffdd");
@@ -276,5 +276,5 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
         }
     }
 }
- 
+
 //Setup VIM: ex: et ts=4 enc=utf-8 :
