@@ -45,7 +45,7 @@ require_once DOKU_PLUGIN.'syntax.php';
 
 class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
-    var $notes = array(
+    public $notes = array(
         'noteimportant' => array('important', 'importante'),
         'notewarning'   => array('warning','bloquante','critique'),
         'notetip'       => array('tip','tuyau','idée'),
@@ -65,7 +65,9 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
     // override default accepts() method to allow nesting
     // - ie, to get the plugin accepts its own entry syntax
     function accepts($mode) {
-      if ($mode == substr(get_class($this), 7)) return true;
+      if ($mode == substr(get_class($this), 7)) {
+	      return true;
+      }
         return parent::accepts($mode);
       }
 
@@ -85,8 +87,10 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
             $note = strtolower(trim(substr($match,5,-1)));
 
             foreach( $this->notes as $class => $names ) {
-              if (in_array($note, $names))
-                return array($state, $class);
+              if (in_array($note, $names)) {
+	              return [$state,
+	                      $class];
+              }
             }
 
             return array($state, $this->default);
