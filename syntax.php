@@ -40,7 +40,7 @@ if (!defined('DOKU_INC')) {
 if (!defined('DOKU_PLUGIN')) {
 	define('DOKU_PLUGIN', DOKU_INC . 'lib/plugins/');
 }
-require_once(DOKU_PLUGIN.'syntax.php');
+require_once DOKU_PLUGIN.'syntax.php';
 
 
 class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
@@ -155,9 +155,9 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
             case DOKU_LEXER_ENTER:
                 $type = substr($data, 4);
                 if ($type == 'classic') {
-                    $type = "note"; // the icon for classic notes is named note.png
+                    $type = 'note'; // the icon for classic notes is named note.png
                 }
-                $colors = array("note"=>"#eeeeff", "warning"=>"#ffdddd", "important"=>"#ffffcc", "tip"=>"#ddffdd");
+                $colors = array('note' => '#eeeeff', 'warning' => '#ffdddd', 'important' => '#ffffcc', 'tip' => '#ddffdd');
 
                 // Content
                 $properties = array();
@@ -184,7 +184,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
                 $properties ['background-color'] = $colors[$type];
                 $renderer->_odtTableCellOpenUseProperties($properties);
 
-                $src = DOKU_PLUGIN."note/images/".$type.".png";
+                $src = DOKU_PLUGIN. 'note/images/' .$type. '.png';
                 $renderer->_odtAddImage($src);
 
                 $renderer->tablecell_close();
