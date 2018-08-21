@@ -45,19 +45,19 @@ require_once DOKU_PLUGIN.'syntax.php';
 
 class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
-    public $notes = array(
-        'noteimportant' => array('important', 'importante'),
-        'notewarning'   => array('warning','bloquante','critique'),
-        'notetip'       => array('tip','tuyau','idée'),
-        'noteclassic'   => array('','classic','classique')
-      );
+    var $notes = [
+        'noteimportant' => ['important', 'importante'],
+        'notewarning'   => ['warning','bloquante','critique'],
+        'notetip'       => ['tip','tuyau','idée'],
+        'noteclassic'   => ['','classic','classique'],
+      ];
 
     var $default = 'noteclassic';
 
     function getType(){ return 'container'; }
     function getPType(){ return 'block'; }
     function getAllowedTypes() {
-        return array('container','substition','protected','disabled','formatting','paragraphs');
+        return ['container','substition','protected','disabled','formatting','paragraphs'];
     }
 
     function getSort(){ return 195; }
@@ -82,8 +82,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
     function handle($match, $state, $pos, Doku_Handler $handler) {
 
         switch ($state) {
-
-          case DOKU_LEXER_ENTER :
+          case DOKU_LEXER_ENTER:
             $note = strtolower(trim(substr($match,5,-1)));
 
             foreach( $this->notes as $class => $names ) {
@@ -93,13 +92,16 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
               }
             }
 
-            return array($state, $this->default);
+            return [$state, $this->default];
+            break;
 
-          case DOKU_LEXER_UNMATCHED :
-            return array($state, $match);
+          case DOKU_LEXER_UNMATCHED:
+            return [$state, $match];
+            break;
 
           default:
-            return array($state);
+            return [$state];
+            break;
         }
     }
 
@@ -161,26 +163,26 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
                 if ($type == 'classic') {
                     $type = 'note'; // the icon for classic notes is named note.png
                 }
-                $colors = array('note' => '#eeeeff', 'warning' => '#ffdddd', 'important' => '#ffffcc', 'tip' => '#ddffdd');
+                $colors = ['note' => '#eeeeff', 'warning' => '#ffdddd', 'important' => '#ffffcc', 'tip' => '#ddffdd'];
 
                 // Content
-                $properties = array();
+                $properties = [];
                 $properties ['width'] = '100%';
                 $properties ['align'] = 'center';
                 $properties ['shadow'] = '#808080 0.18cm 0.18cm';
                 $renderer->_odtTableOpenUseProperties($properties);
 
-                $properties = array();
+                $properties = [];
                 $properties ['width'] = '1.5cm';
                 $renderer->_odtTableAddColumnUseProperties($properties);
 
-                $properties = array();
+                $properties = [];
                 $properties ['width'] = '13.5cm';
                 $renderer->_odtTableAddColumnUseProperties($properties);
 
                 $renderer->tablerow_open();
 
-                $properties = array();
+                $properties = [];
                 $properties ['vertical-align'] = 'middle';
                 $properties ['text-align'] = 'center';
                 $properties ['padding'] = '0.1cm';
@@ -193,7 +195,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
                 $renderer->tablecell_close();
 
-                $properties = array();
+                $properties = [];
                 $properties ['vertical-align'] = 'middle';
                 $properties ['padding'] = '0.3cm';
                 $properties ['border'] = '0.002cm solid #000000';
@@ -232,23 +234,23 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
                 // Create Content
                 // (We only use the CSS parameters that are meaningful for creating the ODT table)
-                $properties = array();
+                $properties = [];
                 $properties ['width'] = '100%';
                 $properties ['align'] = 'center';
                 $properties ['shadow'] = '#808080 0.18cm 0.18cm';
                 $renderer->_odtTableOpenUseProperties($properties);
 
-                $properties = array();
+                $properties = [];
                 $properties ['width'] = '1.5cm';
                 $renderer->_odtTableAddColumnUseProperties($properties);
 
-                $properties = array();
+                $properties = [];
                 $properties ['width'] = '13.5cm';
                 $renderer->_odtTableAddColumnUseProperties($properties);
 
                 $renderer->tablerow_open();
 
-                $properties = array();
+                $properties = [];
                 $properties ['vertical-align'] = $css_properties ['vertical-align'];
                 $properties ['text-align'] = 'center';
                 $properties ['padding'] = '0.1cm';
@@ -262,7 +264,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
                 $renderer->tablecell_close();
 
-                $properties = array();
+                $properties = [];
                 $properties ['vertical-align'] = $css_properties ['vertical-align'];
                 $properties ['text-align'] = $css_properties ['text-align'];
                 $properties ['padding'] = '0.3cm';
