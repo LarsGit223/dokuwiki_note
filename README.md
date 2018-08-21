@@ -49,8 +49,9 @@ Alternatively
  of 2008 / start of 2009 Olivier started to became too busy with other (real-life) activities and occupations
  that active development and support halted. On 2009/06/15 Aurélien Bompard decided, after contacting
  Olivier Cortéz about it, to (temporarily) take-over maintenance and support for the plugin. On the
- same date Mischa The Evil opened a GitHub-repository for the plugin to make it a "real" community plugin.
- On the 16th a re-packaged release is available which "completed" the plugin (doc, license etc.).
+ same date Mischa The Evil opened a [GitHub-repository](https://github.com/MischaTheEvil/dokuwiki_note)
+ for the plugin to make it a "real" community plugin. On the 16th a re-packaged release is available
+ which "completed" the plugin (doc, license etc.).
 
 ## Credits
 
