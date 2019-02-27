@@ -104,7 +104,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
 
             switch ($state) {
                 case DOKU_LEXER_ENTER :
-                    $renderer->doc .= '<div class="'.$data.'">';
+                    $renderer->doc .= '<div class="note '.$data.'">';
                 break;
   
                 case DOKU_LEXER_UNMATCHED :
