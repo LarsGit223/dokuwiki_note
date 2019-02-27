@@ -1,4 +1,4 @@
-.noteclassic, .noteimportant, .notewarning, .notetip {
+.note {
   margin: 2em auto;
   width: 70% !important;
   min-height: 40px;
