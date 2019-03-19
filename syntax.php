@@ -52,7 +52,7 @@ class syntax_plugin_note extends DokuWiki_Syntax_Plugin {
         'noteclassic'   => array('','classic','classique')
       );
 
-    var $default = 'noteclassic';
+    var $default = 'note noteclassic';
 
     function getType(){ return 'container'; }
     function getPType(){ return 'block'; }
